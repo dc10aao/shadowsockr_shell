@@ -12,7 +12,6 @@ clear
 echo
 echo "#############################################################"
 echo "# One click Install ShadowsocksR Server                     #"
-echo "# Intro: https://shadowsocks.be/9.html                      #"
 echo "# liao06550107 <liao06550107@gmail.com>                     #"
 echo "# Github: https://github.com/shadowsocksr/shadowsocksr      #"
 echo "#############################################################"
@@ -457,6 +456,10 @@ install_cleanup(){
 # Uninstall ShadowsocksR
 uninstall_shadowsocksr(){
     printf "Are you sure uninstall ShadowsocksR? (y/n)"
+    printf "\n"
+    read -p "(Default: n):" answer
+    [ -z ${answer} ] && answer="n"
+    if [ "${answer}" == "y" ] || [ "${answer}" == "Y" ]; then
         /etc/init.d/shadowsocks status > /dev/null 2>&1
         if [ $? -eq 0 ]; then
             /etc/init.d/shadowsocks stop
