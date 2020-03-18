@@ -114,6 +114,7 @@ function install_caddy() {
 $your_domain
 {
   root /var/www/
+  tls liao08022040@126.com
   proxy /$newpath localhost:8081 {
     websocket
     header_upstream -Origin
@@ -125,9 +126,11 @@ EOF
 $your_domain
 {
   root /var/www/
+  tls liao08022040@126.com
   proxy /$newpath localhost:8081 {
-      header_upstream Host {host}
-      header_upstream X-Forwarded-Proto {scheme}
+
+      header_upstream Host $your_domain
+      header_upstream X-Forwarded-Proto "https"
       insecure_skip_verify
   }
 }
@@ -148,13 +151,13 @@ function install_v2ray() {
 	bash <(curl -L -s https://install.direct/go.sh)
 	cd /etc/v2ray/
 	rm -f config.json
-	wget https://raw.githubusercontent.com/atrandys/v2ray-ws-tls/master/config.json
+	wget https://raw.githubusercontent.com/lzh06550107/shadowsockr_shell/master/config.json
 	v2uuid=$(cat /proc/sys/kernel/random/uuid)
 	sed -i "s/ws/$1/;" config.json
 	sed -i "s/aaaa/$v2uuid/;" config.json
 	sed -i "s/mypath/$newpath/;" config.json
 	cd /var/www/
-	wget https://github.com/atrandys/v2ray-ws-tls/raw/master/web.zip
+	wget https://raw.githubusercontent.com/lzh06550107/shadowsockr_shell/master/web.zip
 	unzip web.zip
 	systemctl restart v2ray.service
 	systemctl restart caddy.service
