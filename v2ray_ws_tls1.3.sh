@@ -169,7 +169,7 @@ function install_v2ray() {
 		端口：443
 		uuid：${v2uuid}
 		额外id：64
-		加密方式：aes-128-gcm
+		加密方式：none
 		传输协议：$1
 		别名：myws
 		路径：${newpath}
@@ -184,7 +184,7 @@ EOF
 	green "端口：443"
 	green "uuid：${v2uuid}"
 	green "额外id：64"
-	green "加密方式：aes-128-gcm"
+	green "加密方式：none"
 	green "传输协议：$1"
 	green "别名：myconfig"
 	green "路径：${newpath}"
